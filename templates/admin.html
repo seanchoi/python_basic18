@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Amadon Admin</h1>
+    <h3>Add Product</h3>
+    <table>
+        <form action="/add_product/process/" method="POST">
+        {% csrf_token %}
+        <tr>
+            <td>Product name</td>
+            <td><input type="text" name="product_name"></td>
+        </tr>
+        <tr>
+            <td>Product Code</td>
+            <td><input type="text" name="product_code"></td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td><input type="text" name="price"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button>Add</button></td>
+        </tr>
+        </form>
+    </table>
+    <h3>Product List</h3>
+    <table>
+        {% for product in products %}
+        <tr>
+            <td>{{product.product_name}}</td>
+            <td>${{product.price.original_price}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h3>Price List</h3>
+    <table>
+        <thead>
+            <th>Price ID</th>
+            <th>Original Price</th>
+        </thead>
+        {% for price in price %}
+    
+        <tr>
+            <td>{{price.id}}</td>
+            <td>${{price.original_price}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h3>Add Price</h3>
+    <table>
+        <form action="/add_price/process/" method="POST">
+            {% csrf_token %}
+        <tr>
+            <td>Price</td>
+            <td><input type="text" name="price"></td>
+            <td><button>add</button></td>
+        </tr>
+        </form>
+    </table>
+</body>
+</html>
